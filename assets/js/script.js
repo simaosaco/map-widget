@@ -76,7 +76,7 @@ const projection = d3.geoMercator()
 const path = d3.geoPath().projection(projection);
 const g = svg.append("g");
 
-d3.json("assets/json/topo_eer.json").then(data => {
+d3.json("map-widget/assets/json/topo_eer.json").then(data => {
   const regions = topojson.feature(data, data.objects.eer);
 
   g.selectAll("path")
