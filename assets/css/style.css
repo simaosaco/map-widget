@@ -1,1 +1,122 @@
-
+@font-face {
+  font-family: 'Soin Sans Neue';
+  src: url('https://github.com/args20/JSON/blob/f7c55603b863c623f3fcaf49ed9ba05cfca4d3cc/SoinSansNeue-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Soin Sans Neue';
+  src: url('https://github.com/args20/JSON/blob/f7c55603b863c623f3fcaf49ed9ba05cfca4d3cc/SoinSansNeue-Roman.ttf') format('truetype');
+  font-weight: normal;
+  font-display: swap;
+}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+body {
+  margin: 0;
+  font-family: 'Soin Sans Neue', sans-serif;
+  display: flex;
+}
+svg {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
+.info-box {
+  font-family: "Noto Sans", sans-serif;
+  width: 250px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  border-radius: 5px;
+  height: auto;
+  max-height: 100%;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  z-index: 99;
+}
+.info-title {
+  font-weight: 700;
+  font-size: 22px;
+  display: block;
+  line-height: 1em;
+  margin-bottom: 15px;
+}
+.info-list {
+  position: relative;
+}
+.info-list-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+  font-size: 14px;
+  line-height: 1.2em;
+  padding: 9px 0px;
+}
+.info-list-item span {
+  display: block;
+  width: 100%;
+}
+.info-list-item span:first-child {
+  font-weight: 700;
+  padding-right: 20px;
+}
+.info-list-item span:last-child {
+  max-width: max-content;
+  flex-grow: 1;
+}
+.info-list-item:not(:first-child) {
+  border-top: 1px solid #ccc;
+}
+.region {
+  fill: #001a41;
+  stroke: #fff;
+  stroke-width: 0.1;
+  cursor: pointer;
+}
+.region:hover {
+  fill: #01ebc7;
+}
+.region.active {
+  fill: #01ebc7;
+}
+.region-label {
+  font-size: 12px;
+  fill: #ffffff;
+  pointer-events: none;
+  text-anchor: middle;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+}
+#label-North-West {
+  transform: translate(44px, 55px);
+  width: 50px;
+}
+#label-North-East {
+  width: 50px;
+  transform: translate(21px, 0px);
+}
+#label-Yorkshire-and-The-Humber {
+  transform: translate(0px, -20px);
+}
+#label-South-West {
+  transform: translate(90px, -32px);
+  width: 50px;
+}
+#label-South-East {
+  width: 50px;
+  transform: translate(-10px, -20px);
+}
+#label-London {
+  transform: translate(10px, -3px);
+}
+#label-Eastern {
+  transform: translate(0px, 15px);
+}
+#label-West-Midlands {
+  transform: translate(15px, 0px);
+}
