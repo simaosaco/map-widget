@@ -17,9 +17,9 @@ body {
   display: flex;
 }
 svg {
-  width: 100vw;
-  height: 100vh;
-  display: block;
+  flex: 1 1 70%;
+  height: 100%;
+  width: 100%;
 }
 .info-box {
   font-family: "Noto Sans", sans-serif;
