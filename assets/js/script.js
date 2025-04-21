@@ -127,7 +127,7 @@ d3.json("https://args20.github.io/map-widget/assets/json/topo_eer.json").then(da
     .attr("id", d => `label-${d.properties.EER13NM.replace(/\s+/g, '-')}`)
     .attr("x", d => path.centroid(d)[0] - 50)
     .attr("y", d => path.centroid(d)[1] - 10)
-    .attr("width", 100)
+    .attr("width", 80)
     .attr("height", 30)
     .append("xhtml:div")
     .html(d => d.properties.EER13NM);
