@@ -22,7 +22,6 @@ svg {
   width: 100%;
 }
 .info-box {
-  font-family: "Noto Sans", sans-serif;
   width: 250px;
   padding: 20px;
   background: #ffffff;
@@ -44,6 +43,7 @@ svg {
   margin-bottom: 15px;
 }
 .info-list {
+  font-family: "Noto Sans", sans-serif;
   position: relative;
 }
 .info-list-item {
