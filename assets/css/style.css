@@ -91,6 +91,8 @@ svg {
   font-weight: 700;
   color: #ffffff;
   text-align: center;
+  line-height: 1em;
+  display: block;
 }
 #label-North-West {
   transform: translate(44px, 55px);
