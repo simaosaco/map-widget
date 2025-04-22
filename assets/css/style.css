@@ -74,7 +74,7 @@ svg {
 .region {
   fill: #001a41;
   stroke: #fff;
-  stroke-width: 0.1;
+  stroke-width: 0.2;
   cursor: pointer;
 }
 .region:hover {
