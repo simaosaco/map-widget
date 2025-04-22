@@ -122,3 +122,27 @@ svg {
 #label-West-Midlands {
   transform: translate(15px, 0px);
 }
+
+@media screen and (max-width: 767px) {
+  .info-box {
+    position: sticky;
+    width: 100%;
+    border-radius: 0;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    padding: 20px 20px;
+    overflow: hidden;
+    z-index: 9;
+    bottom: 0;
+    left: 0;
+    max-height: 144px;
+  }
+  .info-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .info-list-item {
+    padding: 6px 0px;
+  }
+}
