@@ -130,16 +130,20 @@ svg {
   line-height: 1em;
   display: block;
 }
+#label-North-West > div,
+#label-North-East > div,
+#label-South-West > div,
+#label-South-East > div {
+  width: 50px;
+}
 #label-North-West {
   -webkit-transform: translate(44px, 55px);
      -moz-transform: translate(44px, 55px);
       -ms-transform: translate(44px, 55px);
        -o-transform: translate(44px, 55px);
           transform: translate(44px, 55px);
-  width: 50px;
 }
 #label-North-East {
-  width: 50px;
   -webkit-transform: translate(21px, 0px);
      -moz-transform: translate(21px, 0px);
       -ms-transform: translate(21px, 0px);
@@ -159,10 +163,8 @@ svg {
       -ms-transform: translate(90px, -32px);
        -o-transform: translate(90px, -32px);
           transform: translate(90px, -32px);
-  width: 50px;
 }
 #label-South-East {
-  width: 50px;
   -webkit-transform: translate(-10px, -20px);
      -moz-transform: translate(-10px, -20px);
       -ms-transform: translate(-10px, -20px);
