@@ -140,13 +140,22 @@ d3.json("https://args20.github.io/map-widget/assets/json/topo_eer.json").then(da
   const y = (bounds[0][1] + bounds[1][1]) / 2;
   const scale = Math.min(8, 0.9 / Math.max(dx / width, dy / height));
   const translate = [width / 2 - scale * x, height / 2 - scale * y];
-
+  
   const zoom = d3.zoom()
     .scaleExtent([1, 8])
     .translateExtent([[0, 0], [width, height]])
     .on("zoom", event => g.attr("transform", event.transform));
-
-  svg.call(zoom).call(zoom.transform, d3.zoomIdentity.translate(...translate).scale(scale));
+  
+  // Disable zoom & drag on small screens
+  if (window.innerWidth > 767) {
+    svg.call(zoom).call(
+      zoom.transform,
+      d3.zoomIdentity.translate(...translate).scale(scale)
+    );
+  } else {
+    // Small screen fallback: reset transform just in case
+    g.attr("transform", d3.zoomIdentity);
+  }
 
   svg.on("click", () => {
     d3.selectAll(".region").classed("active", false);
