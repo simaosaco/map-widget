@@ -81,7 +81,7 @@ let projection = d3.geoMercator()
 let path = d3.geoPath().projection(projection);
 
 // Load map
-d3.json("https://args20.github.io/map-widget/assets/json/topo_eer.json").then(data => {
+d3.json("../json/topo_eer.json").then(data => {
   const regions = topojson.feature(data, data.objects.eer);
 
   const paths = g.selectAll("path")
