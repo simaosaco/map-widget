@@ -209,6 +209,7 @@ svg {
     bottom: 0;
     left: 0;
     max-height: 144px;
+    margin-top: -20%;
   }
   .info-title {
     font-size: 18px;
