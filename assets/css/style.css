@@ -228,10 +228,6 @@ svg {
   #map-wrapper {
     height: 100% !important;
   }
-  #map {
-    display: block;
-    height: auto;
-  }
   #map g {
     -webkit-transform-origin: top center;
        -moz-transform-origin: top center;
