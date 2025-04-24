@@ -208,7 +208,7 @@ svg {
     z-index: 9;
     bottom: 0;
     left: 0;
-    max-height: 144px;
+    max-height: none;
     margin-top: -20%;
   }
   .info-title {
