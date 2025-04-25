@@ -67,10 +67,10 @@ const regionData = {
 let lastSelectedRegion = null;
 const g = svg.append("g");
 
-// Responsive setup
+// Initial dimensions
 let width = parseInt(svg.style("width"));
 let height = parseInt(svg.style("height"));
-svg.attr("viewBox", `0 0 ${width} ${height}`);
+svg.attr("viewBox", `0 0 ${width} ${height}`).attr("preserveAspectRatio", "xMidYMid meet");
 
 // Projection & path
 let projection = d3.geoMercator()
@@ -108,13 +108,13 @@ d3.json("https://simaosaco.github.io/map-widget/assets/json/topo_eer.json").then
 
       const info = regionData[name];
       infoBox.html(info ? `
-              <div class="info-title">${name}</div>
+          <div class="info-title">${name}</div>
           <div class="info-list">
-          <div class="info-list-item"><span>Mod and High (ha)</span><span>${info.modHigh}</span></div>
-          <div class="info-list-item"><span>0% assumed Developable Area (ha)</span><span>${info.developable}</span></div>
-          <div class="info-list-item"><span>Homes at 40 dph</span><span>${info.homes40}</span></div>
-          <div class="info-list-item"><span>Homes at 60 dph</span><span>${info.homes60}</span></div>
-        </div>` : `<strong>${name}</strong><p>No data available.</p>`);
+            <div class="info-list-item"><span>Mod and High (ha)</span><span>${info.modHigh}</span></div>
+            <div class="info-list-item"><span>0% assumed Developable Area (ha)</span><span>${info.developable}</span></div>
+            <div class="info-list-item"><span>Homes at 40 dph</span><span>${info.homes40}</span></div>
+            <div class="info-list-item"><span>Homes at 60 dph</span><span>${info.homes60}</span></div>
+          </div>` : `<strong>${name}</strong><p>No data available.</p>`);
 
       event.stopPropagation();
     });
@@ -132,7 +132,7 @@ d3.json("https://simaosaco.github.io/map-widget/assets/json/topo_eer.json").then
     .append("xhtml:div")
     .html(d => d.properties.EER13NM);
 
-  // Zoom setup
+  // Calculate bounds and responsive zoom extent
   const bounds = path.bounds(regions);
   const dx = bounds[1][0] - bounds[0][0];
   const dy = bounds[1][1] - bounds[0][1];
@@ -140,20 +140,22 @@ d3.json("https://simaosaco.github.io/map-widget/assets/json/topo_eer.json").then
   const y = (bounds[0][1] + bounds[1][1]) / 2;
   const scale = Math.min(8, 0.9 / Math.max(dx / width, dy / height));
   const translate = [width / 2 - scale * x, height / 2 - scale * y];
-  
+
+  // Improved zoom behavior
   const zoom = d3.zoom()
     .scaleExtent([1, 8])
-    .translateExtent([[0, 0], [width, height]])
+    .translateExtent([
+      [bounds[0][0] - width, bounds[0][1] - height],
+      [bounds[1][0] + width, bounds[1][1] + height]
+    ])
     .on("zoom", event => g.attr("transform", event.transform));
-  
-  // Disable zoom & drag on small screens
+
   if (window.innerWidth > 767) {
     svg.call(zoom).call(
       zoom.transform,
       d3.zoomIdentity.translate(...translate).scale(scale)
     );
   } else {
-    // Small screen fallback: reset transform just in case
     g.attr("transform", d3.zoomIdentity);
   }
 
@@ -167,25 +169,25 @@ d3.json("https://simaosaco.github.io/map-widget/assets/json/topo_eer.json").then
 
     const defaultInfo = regionData["Total"];
     infoBox.html(`
-        <div class="info-title">England</div>
-          <div class="info-list">
-          <div class="info-list-item"><span>Mod and High (ha)</span><span>${defaultInfo.modHigh}</span></div>
-          <div class="info-list-item"><span>0% assumed Developable Area (ha)</span><span>${defaultInfo.developable}</span></div>
-          <div class="info-list-item"><span>Homes at 40 dph</span><span>${defaultInfo.homes40}</span></div>
-          <div class="info-list-item"><span>Homes at 60 dph</span><span>${defaultInfo.homes60}</span></div>
-        </div>
-      `);
+      <div class="info-title">England</div>
+      <div class="info-list">
+        <div class="info-list-item"><span>Mod and High (ha)</span><span>${defaultInfo.modHigh}</span></div>
+        <div class="info-list-item"><span>0% assumed Developable Area (ha)</span><span>${defaultInfo.developable}</span></div>
+        <div class="info-list-item"><span>Homes at 40 dph</span><span>${defaultInfo.homes40}</span></div>
+        <div class="info-list-item"><span>Homes at 60 dph</span><span>${defaultInfo.homes60}</span></div>
+      </div>
+    `);
   });
 
-  // Default on load
+  // Default info load
   const defaultInfo = regionData["Total"];
   infoBox.html(`
-        <div class="info-title">England</div>
-          <div class="info-list">
-          <div class="info-list-item"><span>Mod and High (ha)</span><span>${defaultInfo.modHigh}</span></div>
-          <div class="info-list-item"><span>0% assumed Developable Area (ha)</span><span>${defaultInfo.developable}</span></div>
-          <div class="info-list-item"><span>Homes at 40 dph</span><span>${defaultInfo.homes40}</span></div>
-          <div class="info-list-item"><span>Homes at 60 dph</span><span>${defaultInfo.homes60}</span></div>
-        </div>
-      `);
+    <div class="info-title">England</div>
+    <div class="info-list">
+      <div class="info-list-item"><span>Mod and High (ha)</span><span>${defaultInfo.modHigh}</span></div>
+      <div class="info-list-item"><span>0% assumed Developable Area (ha)</span><span>${defaultInfo.developable}</span></div>
+      <div class="info-list-item"><span>Homes at 40 dph</span><span>${defaultInfo.homes40}</span></div>
+      <div class="info-list-item"><span>Homes at 60 dph</span><span>${defaultInfo.homes60}</span></div>
+    </div>
+  `);
 });
