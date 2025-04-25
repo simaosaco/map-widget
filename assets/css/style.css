@@ -231,7 +231,7 @@ svg {
   }
 }
 
-@media screen and (max-width: 500px) {
+@media (max-width: 500px), (max-height: 600px) {
   .region-label {
     font-size: 10px;
   }
@@ -241,35 +241,35 @@ svg {
     margin: auto;
   }
   #label-North-East {
-      transform: translate(6px, 0px);
+    transform: translate(6px, 0px);
   }
   #label-North-West {
-      transform: translate(18px, 38px);
+    transform: translate(18px, 38px);
   }
   #label-Yorkshire-and-The-Humber {
-      transform: translate(5px, -8px);
+    transform: translate(5px, -8px);
   }
   #label-Yorkshire-and-The-Humber > div {
-      width: 67px;
-      margin: auto;
+    width: 67px;
+    margin: auto;
   }
   #label-East-Midlands {
-      transform: translate(8px, 4px);
+    transform: translate(8px, 4px);
   }
   #label-East-Midlands > div, #label-West-Midlands > div {
-      width: 50px;
-      margin: auto;
+    width: 50px;
+    margin: auto;
   }
   #label-West-Midlands {
-      transform: translate(14px, 0px);
+    transform: translate(14px, 0px);
   }
   #label-South-East {
-      transform: translate(-11px, -5px);
+    transform: translate(-11px, -5px);
   }
   #label-South-West {
-      transform: translate(46px, -14px);
+    transform: translate(46px, -14px);
   }
   #label-London {
-      transform: translate(10px, 1px);
+    transform: translate(10px, 1px);
   }
 }
