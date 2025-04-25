@@ -150,14 +150,41 @@ d3.json("https://simaosaco.github.io/map-widget/assets/json/topo_eer.json").then
     ])
     .on("zoom", event => g.attr("transform", event.transform));
 
-  if (window.innerWidth > 767) {
-    svg.call(zoom).call(
-      zoom.transform,
-      d3.zoomIdentity.translate(...translate).scale(scale)
-    );
-  } else {
-    g.attr("transform", d3.zoomIdentity);
-  }
+  const isMobile = window.innerWidth <= 767;
+
+if (isMobile) {
+  // Recalculate projection & path for mobile
+  const mobileWidth = width;
+  const mobileHeight = height;
+
+  const mobileScale = Math.min(
+    mobileWidth / dx,
+    mobileHeight / dy
+  ) * 0.95; // padding factor
+
+  const mobileX = (bounds[0][0] + bounds[1][0]) / 2;
+  const mobileY = (bounds[0][1] + bounds[1][1]) / 2;
+
+  projection
+    .translate([mobileWidth / 2, mobileHeight / 2])
+    .scale(mobileScale);
+
+  path = d3.geoPath().projection(projection);
+
+  g.selectAll("path").attr("d", path);
+
+  g.selectAll(".region-label")
+    .attr("x", d => path.centroid(d)[0] - 50)
+    .attr("y", d => path.centroid(d)[1] - 10);
+
+  g.attr("transform", d3.zoomIdentity); // no zoom
+
+} else {
+  svg.call(zoom).call(
+    zoom.transform,
+    d3.zoomIdentity.translate(...translate).scale(scale)
+  );
+}
 
   svg.on("click", () => {
     d3.selectAll(".region").classed("active", false);
