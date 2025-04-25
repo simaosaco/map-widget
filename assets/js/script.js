@@ -159,7 +159,7 @@ const zoom = d3.zoom()
   .scaleExtent([scale * 0.5, 8]) // Allow zoom out/in properly
   .translateExtent([
     [-width, -height],       // Allow extra space for dragging
-    [width * 2, height * 2]
+    [width * 0.2, height * 0.2]
   ])
   .on("zoom", event => g.attr("transform", event.transform));
 
