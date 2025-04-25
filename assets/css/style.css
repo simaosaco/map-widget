@@ -223,6 +223,7 @@ svg {
   }
   svg {
     height: 90vh;
+    margin-bottom: -10%;
   }
   #map-wrapper {
     height: auto !important;
