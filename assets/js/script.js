@@ -64,6 +64,12 @@ const regionData = {
 }
 };
 
+function updateLabelsPosition() {
+  g.selectAll(".region-label")
+    .attr("x", d => path.centroid(d)[0] - 50)
+    .attr("y", d => path.centroid(d)[1] - 10);
+}
+
 let lastSelectedRegion = null;
 const g = svg.append("g");
 
@@ -153,32 +159,36 @@ const zoom = d3.zoom()
 const isMobile = window.innerWidth <= 767;
 
 if (isMobile) {
-// Fit the projection to bounds
-const scale = Math.min(width / dx, height / dy) * 0.9;
-const x = (bounds[0][0] + bounds[1][0]) / 2;
-const y = (bounds[0][1] + bounds[1][1]) / 2;
+  // Fit the projection to bounds
+  const scale = Math.min(width / dx, height / dy) * 0.9;
+  const x = (bounds[0][0] + bounds[1][0]) / 2;
+  const y = (bounds[0][1] + bounds[1][1]) / 2;
+  
+  // Update projection for mobile
+  projection = d3.geoMercator()
+    .center([-1.5, 52.5]) // UK center
+    .scale(scale * 4000) // rescale
+    .translate([width / 2, height / 2]);
+  
+  path = d3.geoPath().projection(projection);
+  
+  // Re-render map and labels
+  g.selectAll("path").attr("d", path);
+  
+  g.selectAll(".region-label")
+    .attr("x", d => path.centroid(d)[0] - 50)
+    .attr("y", d => path.centroid(d)[1] - 10);
 
-// Update projection for mobile
-projection = d3.geoMercator()
-  .center([-1.5, 52.5]) // UK center
-  .scale(scale * 4000) // rescale
-  .translate([width / 2, height / 2]);
-
-path = d3.geoPath().projection(projection);
-
-// Re-render map and labels
-g.selectAll("path").attr("d", path);
-
-g.selectAll(".region-label")
-  .attr("x", d => path.centroid(d)[0] - 50)
-  .attr("y", d => path.centroid(d)[1] - 10);
-
-g.attr("transform", d3.zoomIdentity);
+  updateLabelsPosition();
+  
+  g.attr("transform", d3.zoomIdentity);
 } else {
-svg.call(zoom).call(
-  zoom.transform,
-  d3.zoomIdentity.translate(...translate).scale(scale)
-);
+  svg.call(zoom).call(
+    zoom.transform,
+    d3.zoomIdentity.translate(...translate).scale(scale)
+  );
+
+  updateLabelsPosition();
 }
 
 
