@@ -231,7 +231,7 @@ svg {
   }
 }
 
-@media (max-width: 500px), (max-height: 600px) {
+@media (max-width: 550px) {
   .region-label {
     font-size: 10px;
   }
