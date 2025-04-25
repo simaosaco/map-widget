@@ -231,13 +231,6 @@ svg {
   }
   #map-wrapper {
     height: auto !important;
-    min-height: 100vh;
-  }
-  #map g {
-    -webkit-transform-origin: top center;
-       -moz-transform-origin: top center;
-        -ms-transform-origin: top center;
-         -o-transform-origin: top center;
-            transform-origin: top center;
+    min-height: 90vh;
   }
 }
