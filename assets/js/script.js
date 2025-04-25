@@ -156,9 +156,12 @@ const translate = [width / 2 - scale * x, height / 2 - scale * y];
   ])
   .on("zoom", event => g.attr("transform", event.transform));*/
 const zoom = d3.zoom()
-.scaleExtent([scale * 0.5, 8]) // Allow zoom out past default
-.translateExtent([[0, 0], [width, height]])
-.on("zoom", event => g.attr("transform", event.transform));
+  .scaleExtent([scale * 0.5, 8]) // Allow zoom out/in properly
+  .translateExtent([
+    [-width, -height],       // Allow extra space for dragging
+    [width * 2, height * 2]
+  ])
+  .on("zoom", event => g.attr("transform", event.transform));
 
 
 const isMobile = window.innerWidth <= 767;
